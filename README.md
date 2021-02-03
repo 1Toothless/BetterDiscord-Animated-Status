@@ -1,5 +1,5 @@
 # BetterDiscord-Animated-Status
-*    Installation
+*    [Installation](https://github.com/1Toothless/BetterDiscord-Animated-Status/blob/main/README.md#installation)
 *    Usage
 *    Timeout / Time Per Keyframe
 *    'rich' vs 'raw' editor
