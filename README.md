@@ -37,12 +37,12 @@ On mobile systems the timeout might have to be set a little higher (10-14 Second
 
 ## 'rich' vs 'raw' editor
 Since the lastest version, the plugin now features a new rich editor. It doesn't add functionality, but makes editing your animations a whole lot easier!\
-![Rich Editor](/screenshots/rich.png?raw=true)\
+![Rich Editor](https://i.ibb.co/98SJQpN/rich.png)\
 The raw editor is just a text input field, where you can edit your animations manually in a json-like format\
 (looking at the source code reveals that it's basically json with missing brackets)
 
 ## Animations
-![Settings Page](/screenshots/settings.png?raw=true)\
+![Settings Page](https://i.ibb.co/F4BTPX2/settings.png)\
 Animations are made in a really simple and easy to understand syntax.
 ```
 "Test (Message)"
@@ -61,13 +61,13 @@ Switching text:
 
 ## Discord Nitro Emoji
 - Open a discord Chat, type `\`.
-<img src="screenshots/nitro0.png">
+<img src="https://i.ibb.co/Ct853NT/nitro0.png">
 - Select the emoji you want to include in your status using the emoji picker.
-<img src="screenshots/nitro1.png">
+<img src="https://i.ibb.co/VmVY8QQ/nitro1.png">
 - Notice that the message changed to `<:emojiname:emojiid>`. The values inside the brackets (emojiname and emojiid) are the values required for the status.
-<img src="screenshots/nitro2.png">
+<img src="https://i.ibb.co/qNs0c4Z/nitro2.png">
 - Edit the settings accordingly
-<img src="screenshots/nitro3.png">
+<img src="https://i.ibb.co/BB3VrV0/nitro3.png">
 
 ### Custom Javascript
 Have the current time as your status:
@@ -76,7 +76,7 @@ Have the current time as your status:
 ```
 
 Have the current time with the corresponding clock symbol as your current status
-![Settings Page](/screenshots/status_clock.png?raw=true)
+![Settings Page](https://i.ibb.co/s9rccdd/status-clock.png)
 ```
 "eval let fmt=t=>(t<10?'0':'')+t;let d=new Date();`${fmt(d.getHours())}:${fmt(d.getMinutes())}:${fmt(d.getSeconds())}`;", "eval ['🕛','🕐','🕑','🕒','🕓','🕔','🕕','🕖','🕗','🕘','🕙','🕚'][((new Date()).getHours()%12)];"
 ```
