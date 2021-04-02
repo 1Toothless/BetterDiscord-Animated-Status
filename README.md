@@ -16,6 +16,7 @@
 ## Installation
 Install [BetterDiscord](https://github.com/rauenzi/BetterDiscordApp)\
 Download [animated-status.plugin.js](/Animated_Status.plugin.js?raw=true) into the following directory\
+Once clicking the animated-status.plugin.js button above hold down CTRL + S to save the file to your desktop. And follow the installations below.
 Mac: `~/Library/Preferences/BetterDiscord`\
 Windows: `%appdata%\BetterDiscord\plugins`\
 Linux: `~/.config/BetterDiscord/plugins`
