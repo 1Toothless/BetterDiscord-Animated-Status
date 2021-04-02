@@ -164,8 +164,8 @@ class AnimatedStatus {
 		let timeout = GUI.newInput();
 		timeout.setAttribute("type", "number");
 		timeout.addEventListener("focusout", () => {
-			if (parseInt(timeout.value) < 2400) {
-				timeout.value = "2400";
+			if (parseInt(timeout.value) < 600) {
+				timeout.value = "600";
 			}
 		});
 		timeout.value = this.getData("timeout");
