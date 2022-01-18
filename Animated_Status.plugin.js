@@ -1,4 +1,14 @@
-//META{"name":"AnimatedStatus","source":"https://raw.githubusercontent.com/1Toothless/BetterDiscord-Animated-Status/main/Animated_Status.plugin.js","website":"https://github.com/1Toothless/BetterDiscord-Animated-Status"}*//
+/**
+ * @name AnimatedStatus
+ * @version 0.11.0
+ * @author TV 1Toothless, Hoax
+ * @description Animate your Discord status
+ * @website https://github.com/1Toothless/BetterDiscord-Animated-Status
+ * @source https://github.com/1Toothless/BetterDiscord-Animated-Status/blob/main/Animated_Status.plugin.js
+ * @updateUrl https://raw.githubusercontent.com/1Toothless/BetterDiscord-Animated-Status/main/Animated_Status.plugin.js
+ */
+
+const APIModule = BdApi.findModuleByProps("patch");
 
 class AnimatedStatus {
 	/* BD functions */
@@ -33,7 +43,7 @@ class AnimatedStatus {
 	}
 
 	start () {
-		if (this.animation == undefined || this.timeout == undefined || Status.authToken == undefined) return;
+		if (this.animation == undefined || this.timeout == undefined) return;
 		this.Status_Animate();
 	}
 
@@ -66,7 +76,7 @@ class AnimatedStatus {
 		});
 	}
 
-	// Ui related, but special components
+	// Ui related, but special components 
 	newRawEdit (str = "") {
 		let out = GUI.newTextarea();
 		out.style.fontFamily = "SourceCodePro,Consolas,Liberation Mono,Menlo,Courier,monospace";
@@ -147,15 +157,15 @@ class AnimatedStatus {
 		let settings = document.createElement("div");
 		settings.style.padding = "10px";
 
-		/*
-			Token gets automatically loaded
+		
+			// Token gets automatically loaded
 
-			// Auth token
-			settings.appendChild(GUI.newLabel("AuthToken (https://discordhelp.net/discord-token)"));
-			let token = GUI.newInput();
-			token.value = this.getData("token");
-			settings.appendChild(token);
-		*/
+			// // Auth token
+			// settings.appendChild(GUI.newLabel("AuthToken (https://discordhelp.net/discord-token)"));
+			// let token = GUI.newInput();
+			// token.value = this.getData("token");
+			// settings.appendChild(token);
+		
 
 		settings.appendChild(GUI.newDivider());
 
@@ -164,8 +174,8 @@ class AnimatedStatus {
 		let timeout = GUI.newInput();
 		timeout.setAttribute("type", "number");
 		timeout.addEventListener("focusout", () => {
-			if (parseInt(timeout.value) < 600) {
-				timeout.value = "600";
+			if (parseInt(timeout.value) < 2400) {
+				timeout.value = "2400";
 			}
 		});
 		timeout.value = this.getData("timeout");
@@ -301,35 +311,6 @@ class AnimatedStatus {
 
 /* Status API */
 const Status = {
-	authToken: Object.values(webpackJsonp.push([ [], { ['']: (_, e, r) => { e.cache = r.c } }, [ [''] ] ]).cache).find(m => m.exports && m.exports.default && m.exports.default.getToken !== void 0).exports.default.getToken(),
-
-	strerror: (req) => {
-		if (req.status < 400)
-			return undefined;
-
-		if (req.status == 401)
-			return "Invalid AuthToken";
-
-		let json = JSON.parse(req.response);
-		for (const s of ["errors", "custom_status", "text", "_errors", 0, "message"])
-			if ((json == undefined) || ((json = json[s]) == undefined))
-				return "Internal. Report at github.com/toluschr/BetterDiscord-Animated-Status";
-
-		return json;
-	},
-
-	request: () => {
-		let req = new XMLHttpRequest();
-		req.open("PATCH", "/api/v8/users/@me/settings", true);
-		req.setRequestHeader("authorization", Status.authToken);
-		req.setRequestHeader("content-type", "application/json");
-		req.onload = () => {
-			let err = Status.strerror(req);
-			if (err != undefined)
-				BdApi.showToast(`Animated Status: Error: ${err}`, {type: "error"});
-		};
-		return req;
-	},
 
 	set: (status) => {
 		let data = {};
@@ -338,12 +319,17 @@ const Status = {
 		if (status.length >= 1) data.text = status[0];
 		if (status.length >= 2) data.emoji_name = status[1];
 		if (status.length >= 3) data.emoji_id = status[2];
-
-		Status.request().send(JSON.stringify({custom_status: data}));
+		APIModule.patch({
+            url:  "/users/@me/settings",
+            body: {custom_status: data}
+        }).catch(console.error)
 	},
 
 	unset: () => {
-		Status.request().send('{"custom_status":null}');
+		APIModule.patch({
+            url:  "/users/@me/settings",
+            body: {custom_status: null}
+        }).catch(console.error)
 	}
 };
 
